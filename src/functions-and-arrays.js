@@ -21,6 +21,9 @@ const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard',
 
 function findLongestWord(arrAIter){
   let largeWord = '';
+  if (arrAIter.length === 0) {
+    return null;
+  }
 
   for(let i = 0; i < arrAIter.length; i++) {
     if(arrAIter[i].length > largeWord.length) {
@@ -77,6 +80,10 @@ const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
 function averageNumbers(numbersAvg) {
   let average = 0;
+  if (numbersAvg.length === 0) {
+    return null;
+  }
+
   for(let i = 0; i < numbersAvg.length; i++) {
     average += numbersAvg[i];
   };
@@ -125,6 +132,10 @@ const wordsUnique = [
 
 function uniquifyArray(wordsUnique) {
   let newArray = [];
+
+  if (wordsUnique.length === 0) {
+    return null;
+  }
 
   for (const elementoArr of wordsUnique) {
     if(newArray.indexOf(elementoArr) === -1) {
