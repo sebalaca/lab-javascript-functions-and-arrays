@@ -223,9 +223,96 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+  let greatest = 0;
 
+  let horizontal = 0;
+  let vertical = 0;
+  let diagonal = 0;
+  let inverseDiagonal = 0;
 
+  for (let ver = 0; ver < matrix.length - 3; ver++) {
+    for (let hor = 0; hor < matrix.length - 3; hor++) {
+      horizontal =
+        matrix[ver][hor] *
+        matrix[ver][hor + 1] *
+        matrix[ver][hor + 2] *
+        matrix[ver][hor + 3];
+      if (horizontal > greatest) {
+        greatest = horizontal;
+      }
+
+      vertical =
+        matrix[ver][hor] *
+        matrix[ver + 1][hor] *
+        matrix[ver + 2][hor] *
+        matrix[ver + 3][hor];
+      if (vertical > greatest) {
+        greatest = vertical;
+      }
+
+      diagonal =
+        matrix[ver][hor] *
+        matrix[ver + 1][hor + 1] *
+        matrix[ver + 2][hor + 2] *
+        matrix[ver + 3][hor + 3];
+      if (diagonal > greatest) {
+        greatest = diagonal;
+      }
+
+      inverseDiagonal =
+        matrix[ver][hor + 3] *
+        matrix[ver + 1][hor + 2] *
+        matrix[ver + 2][hor + 1] *
+        matrix[ver + 3][hor];
+      if (inverseDiagonal > greatest) {
+        greatest = inverseDiagonal;
+      }
+    }
+  }
+  return greatest;
+}
+
+function greatestProductOfDiagonals(matrix) {
+  const productsOfFourNumbers = [];
+
+  matrix.forEach((arr, index) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i + 3]) {
+        let product = arr[i] * arr[i + 1] * arr[i + 2] * arr[i + 3];
+        productsOfFourNumbers.push(product);
+      }
+    }
+    for (let i = 0; i < arr.length; i++) {
+      if (matrix[index + 3] && matrix[index + 3][i]) {
+        let product =
+          matrix[index][i] *
+          matrix[index + 1][i] *
+          matrix[index + 2][i] *
+          matrix[index + 3][i];
+        productsOfFourNumbers.push(product);
+      }
+    }
+    for (let i = 0; i < arr.length; i++) {
+      if (matrix[index + 3] && matrix[index + 3][i + 3]) {
+        let product =
+          matrix[index][i] *
+          matrix[index + 1][i + 1] *
+          matrix[index + 2][i + 2] *
+          matrix[index + 3][i + 3];
+        productsOfFourNumbers.push(product);
+      }
+    }
+  });
+
+  let result = 0;
+  productsOfFourNumbers.forEach((num) => {
+    if (num > result) {
+      result = num;
+    }
+  });
+  return result;
+}
 
 
 // The following is required to make unit tests work.
